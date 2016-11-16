@@ -1,0 +1,4 @@
+#!/usr/bin/node
+
+const bootstrapper = require('../lib/bootstrapper');
+bootstrapper.main();

@@ -1,0 +1,32 @@
+{
+  "name": "bootstrapper",
+  "version": "0.0.1",
+  "description": "Simple program to insert in redis the initial 'users' that will be using the authentication, in this case the users are other programs (micro services and sdks).",
+  "main": "bootstrapper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/edify/cl-auth.git"
+  },
+  "keywords": [
+    "cl-auth",
+    "bootstrap",
+    "authentication"
+  ],
+  "author": "diugalde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/edify/cl-auth/issues"
+  },
+  "homepage": "https://gitlab.com/edify/cl-auth#README",
+  "dependencies": {
+    "args": "^2.0.0",
+    "bluebird": "^3.4.4",
+    "denodeify": "^1.2.1",
+    "lodash": "^4.15.0",
+    "node-uuid": "^1.4.7",
+    "redis": "^2.6.2"
+  }
+}

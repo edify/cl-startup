@@ -1,0 +1,41 @@
+orientdb:
+  image: orientdb:2.2.6
+  ports:
+    - "2434:2434"
+    - "2480:2480"
+    - "2424:2424"
+  environment:
+    - ORIENTDB_ROOT_PASSWORD=root
+
+elasticsearch:
+  build: docker/elasticsearch
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  volumes:
+    - "/mnt/sda1/dockerVolumes/elasticsearch:/usr/share/elasticsearch/data"
+    - "/mnt/sda1/dockerVolumes/elasticsearch/dumps:/usr/share/elasticsearch/data/dumps"
+
+mongodb:
+  image: mongo:3.2.8
+  ports:
+    - "27017:27017"
+  volumes:
+    - "/mnt/sda1/dockerVolumes/mongodb:/data/db"
+    - "/mnt/sda1/dockerVolumes/mongodb/dumps:/data/dumps"
+
+redis:
+  image: redis:3.0
+  command: redis-server --appendonly yes
+  ports:
+    - "6379:6379"
+  volumes:
+    - "/mnt/sda1/dockerVolumes/redis:/opt/redis/data"
+
+rabbitmq:
+  image: rabbitmq:3-management
+  ports:
+    - "5672:5672"   # port for the daemon API.
+    - "15672:15672" # port for the Management interface.
+  volumes:
+    - "/mnt/sda1/dockerVolumes/rabbitmq:/opt/rabbitmq/var/lib/rabbitmq"
