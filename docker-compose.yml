@@ -5,7 +5,7 @@ orientdb:
     - "2480:2480"
     - "2424:2424"
   environment:
-    - ORIENTDB_ROOT_PASSWORD=root
+    - ORIENTDB_ROOT_PASSWORD
 
 elasticsearch:
   build: docker/elasticsearch
