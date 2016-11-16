@@ -10,7 +10,7 @@ const bluebird = require('bluebird');
 const redis = require('redis');
 
 const config = require('./config');
-const clAuthUtils = require('../../cl-auth-js/lib/utils');
+const clAuthUtils = require('../../../cl-auth-js/lib/utils');
 const utils = require('./utils');
 
 
