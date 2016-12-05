@@ -1,41 +1,122 @@
-orientdb:
-  image: orientdb:2.2.6
-  ports:
-    - "2434:2434"
-    - "2480:2480"
-    - "2424:2424"
-  environment:
-    - ORIENTDB_ROOT_PASSWORD
+version: '2'
+services:
+  cl-orientdb:
+    image: "orientdb:${CL_ODB_VERSION}"
+    container_name: cl-orientdb-container
+    ports:
+      - "2480:2480"
+      - "2424:2424"
+    environment:
+      - ORIENTDB_ROOT_PASSWORD
 
-elasticsearch:
-  build: docker/elasticsearch
-  ports:
-    - "9200:9200"
-    - "9300:9300"
-  volumes:
-    - "/mnt/sda1/dockerVolumes/elasticsearch:/usr/share/elasticsearch/data"
-    - "/mnt/sda1/dockerVolumes/elasticsearch/dumps:/usr/share/elasticsearch/data/dumps"
+  cl-elasticsearch:
+    build: docker/elasticsearch
+    container_name: cl-elasticsearch-container
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - "/mnt/sda1/dockerVolumes/elasticsearch:/usr/share/elasticsearch/data"
+      - "/mnt/sda1/dockerVolumes/elasticsearch/dumps:/usr/share/elasticsearch/data/dumps"
 
-mongodb:
-  image: mongo:3.2.8
-  ports:
-    - "27017:27017"
-  volumes:
-    - "/mnt/sda1/dockerVolumes/mongodb:/data/db"
-    - "/mnt/sda1/dockerVolumes/mongodb/dumps:/data/dumps"
+  cl-mongodb:
+    image: "mongo:${CL_MONGODB_VERSION}"
+    container_name: cl-mongodb-container
+    ports:
+      - "27017:27017"
+    volumes:
+      - "/mnt/sda1/dockerVolumes/mongodb:/data/db"
+      - "/mnt/sda1/dockerVolumes/mongodb/dumps:/data/dumps"
 
-redis:
-  image: redis:3.0
-  command: redis-server --appendonly yes
-  ports:
-    - "6379:6379"
-  volumes:
-    - "/mnt/sda1/dockerVolumes/redis:/opt/redis/data"
+  cl-redis:
+    image: "redis:${CL_REDIS_VERSION}"
+    container_name: cl-redis-container
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+    volumes:
+      - "/mnt/sda1/dockerVolumes/redis:/opt/redis/data"
 
-rabbitmq:
-  image: rabbitmq:3-management
-  ports:
-    - "5672:5672"   # port for the daemon API.
-    - "15672:15672" # port for the Management interface.
-  volumes:
-    - "/mnt/sda1/dockerVolumes/rabbitmq:/opt/rabbitmq/var/lib/rabbitmq"
+  cl-rabbitmq:
+    image: "rabbitmq:${CL_RMQ_VERSION}"
+    container_name: cl-rabbitmq-container
+    ports:
+      - "5672:5672"   # port for the daemon API.
+      - "15672:15672" # port for the Management interface.
+    volumes:
+      - "/mnt/sda1/dockerVolumes/rabbitmq:/opt/rabbitmq/var/lib/rabbitmq"
+
+  cl-lo:
+    image: "edify-dkr.jfrog.io/cl-lo:${CL_LO_VERSION}"
+    #image: cl-lo
+    container_name: cl-lo-container
+    ports:
+      - "8080:8080"
+      - "8043:8043"
+    links:
+      - cl-elasticsearch
+      - cl-mongodb
+      - cl-redis
+      - cl-rabbitmq
+    environment:
+      - SPRING_PROFILES_ACTIVE=BE_Mongo,FS_S3,SRCH_ES,INDEX_RMQ
+      - JAVA_OPTS=""
+      - AWS_ACCESS_KEY
+      - AWS_SECRET_KEY
+      - AWS_S3_BUCKET_NAME
+      - CERT_KEY_STORE_PATH
+      - CERT_KEY_STORE_PW
+      - CERT_KEY_PW
+      - CL_API_CLIENT_ID
+      - CL_API_CLIENT_SECRET
+      - CL_REDIS_HOST
+      - CL_REDIS_PORT
+      - CL_AUTH_PASSPHRASE
+      - CL_LO_HTTPS_PORT=8043
+      - CL_LO_HTTP_PORT=8080
+      - CL_MONGO_URI
+      - CL_ES_URL
+      - CL_ES_HOST
+      - CL_ES_PORT
+      - CL_RMQ_URL
+
+  cl-index:
+    image: "edify-dkr.jfrog.io/cl-index:${CL_INDEX_VERSION}"
+    #image: cl-index
+    container_name: cl-index-container
+    links:
+      - cl-elasticsearch
+      - cl-rabbitmq
+    environment:
+      - CL_ES_URL
+      - CL_RMQ_URL
+
+  cl-curricula:
+    image: "edify-dkr.jfrog.io/cl-curricula:${CL_CURRICULA_VERSION}"
+    #image: cl-curricula
+    container_name: cl-curricula-container
+    ports:
+      - "8081:8081"
+    links:
+      - cl-orientdb
+      - cl-redis
+      - cl-lo
+    environment:
+      - CL_CURRICULA_PORT
+      - CL_CURRICULA_AUDIT
+      - CL_ODB_NAME
+      - CL_ODB_HOST
+      - CL_ODB_PORT
+      - CL_ODB_ROOT_USR
+      - CL_ODB_ROOT_PWD
+      - CL_ODB_USR
+      - CL_ODB_PWD
+      - CL_LO_API_ID
+      - CL_LO_API_SECRET
+      - CL_REDIS_HOST
+      - CL_REDIS_PORT
+      - CL_AUTH_PASSPHRASE
+      - CL_LO_BASE_URL
+      - CL_LO_API_URL
