@@ -96,6 +96,14 @@ $ docker login edify-dkr.jfrog.io
 2.  Execute docker-compose:
 
 ```bash
-$ docker-compose up
+$ docker-compose up -d
+
+```
+
+3.  Run the migrations for OrientDB.
+
+```bash
+$ docker exec -it cl-curricula-container /usr/share/cl-curricula/node_modules/orientjs/bin/orientjs migrate up \
+  -h $CL_ODB_HOST -p $CL_ODB_PORT -n $CL_ODB_NAME -U $CL_ODB_USR -P $CL_ODB_PWD -d /usr/share/cl-curricula/lib/db
 
 ```
