@@ -9,14 +9,15 @@ const args = require('args');
 const bluebird = require('bluebird');
 const redis = require('redis');
 
+const accounts = require('../accounts.json');
 const config = require('./config');
-const clAuthUtils = require('../../../cl-auth-js/lib/utils');
+const clAuthUtils = require('../node_modules/cl-auth-js/lib/utils');
 const utils = require('./utils');
 
 
 // Init redisClient.
 bluebird.promisifyAll(redis.RedisClient.prototype);
-var redisClient = redis.createClient(config.redis.port);
+var redisClient = redis.createClient(config.redis.port, config.redis.host);
 
 
 // Generate a list of entities that will be saved in redis. Each entity has its friendlyKey, apiKey and secret.
@@ -70,7 +71,7 @@ function printBootstrapResults(results, bootstrapData) {
 
 // Starts the bootstrap process.
 function bootstrap() {
-    let friendlyKeys = ['cl-sdk-js-lo', 'cl-sdk-java-lo'];
+    let friendlyKeys = accounts;
     let bootstrapData = getBootstrapData(friendlyKeys);
     return saveBootstrapData(bootstrapData).then(function(res) {
         Promise.resolve(res)

@@ -16,10 +16,12 @@ Every entity has the following structure:
 
 ## Build and Run
 
-1.  First, you need to install nodejs v6.4.0. You can follow the instructions here [NodeJS](https://nodejs.org).
+1.  First, you need to install nodejs v6.9.1. You can follow the instructions here [NodeJS](https://nodejs.org).
 
 2.  Install all the dependencies:
 ```bash
+$ curl -u$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD https://edify.jfrog.io/edify/api/npm/auth > ~/.npmrc
+$ echo registry=http://edify.jfrog.io/edify/api/npm/npm-edify >> ~/.npmrc
 $ npm install
 ```
 
