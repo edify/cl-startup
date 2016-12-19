@@ -107,3 +107,11 @@ $ docker exec -it cl-curricula-container /usr/share/cl-curricula/node_modules/or
   -h $CL_ODB_HOST -p $CL_ODB_PORT -n $CL_ODB_NAME -U $CL_ODB_USR -P $CL_ODB_PWD -d /usr/share/cl-curricula/lib/db
 
 ```
+
+Note: If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
+
+```bash
+$ docker rmi image
+$ docker-compose rm
+
+```

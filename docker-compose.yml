@@ -54,7 +54,7 @@ services:
     container_name: cl-lo-container
     ports:
       - "8080:8080"
-      - "8043:8043"
+      - "8443:8443"
     links:
       - cl-elasticsearch
       - cl-mongodb
