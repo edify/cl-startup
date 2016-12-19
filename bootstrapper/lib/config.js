@@ -22,7 +22,8 @@
 // Config object
 const config = {
     redis: {
-        port: (process.env.CL_AUTH_REDIS_PORT || 6379)
+    	host: (process.env.CLB_REDIS_HOST || 'localhost'),
+        port: (process.env.CLB_REDIS_PORT || 6379)
     },
     passphrase: (process.env.CL_AUTH_PASSPHRASE || 'passphrase')
 };

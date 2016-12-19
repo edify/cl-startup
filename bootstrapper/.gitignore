@@ -15,6 +15,7 @@ coverage
 node_modules/
 .tmp/
 logs
+.npmrc
 
 
 #-------------------JetBrains IDEs-------------------

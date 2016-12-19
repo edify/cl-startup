@@ -65,6 +65,10 @@ $ docker-compose up cl-redis
 
 ```bash
 $ cd bootstrapper
+$ export ARTIFACTORY_USERNAME=
+$ export ARTIFACTORY_PASSWORD=
+$ curl -u$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD https://edify.jfrog.io/edify/api/npm/auth > ./.npmrc
+$ echo registry=http://edify.jfrog.io/edify/api/npm/npm-edify >> ./.npmrc
 $ npm install
 ```
 
@@ -74,14 +78,25 @@ $ npm install
 $ export CL_AUTH_PASSPHRASE=passphrase
 ```
 
-4.  Execute the script and copy the printed values.
+4. You should set the following environment variables for the redis configuration.
+
+```bash
+$ export CLB_REDIS_HOST=localhost
+$ export CLB_REDIS_PORT=6379
+```
+
+
+5.  Execute the script and copy the printed values.
 
 ```bash
 $ chmod +x bin/bootstrapper
 $ ./bin/bootstrapper 
 ```
 
-Note: If you run ./bin/bootstrapper --flushall, it will erase the redis storage first.
+Notes:
+
+  -  If you run ./bin/bootstrapper --flushall, it will erase the redis storage first.
+  -  Check the accounts.json file to add more accounts.
 
 
 ## Run
