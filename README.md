@@ -19,6 +19,7 @@ export CERT_KEY_STORE_PW=changeit
 export CERT_KEY_PW=changeit
 export CL_REDIS_HOST=cl-redis
 export CL_REDIS_PORT=6379
+export CL_REDIS_PW=root
 export CL_AUTH_PASSPHRASE=passphrase
 export CL_LO_HTTPS_PORT=8043
 export CL_LO_HTTP_PORT=8080
@@ -81,8 +82,9 @@ $ export CL_AUTH_PASSPHRASE=passphrase
 4. You should set the following environment variables for the redis configuration.
 
 ```bash
-$ export CLB_REDIS_HOST=localhost
-$ export CLB_REDIS_PORT=6379
+$ export CL_REDIS_HOST=localhost
+$ export CL_REDIS_PORT=6379
+$ export CL_REDIS_PW=root
 ```
 
 

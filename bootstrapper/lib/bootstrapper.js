@@ -34,7 +34,7 @@ const utils = require('./utils');
 
 // Init redisClient.
 bluebird.promisifyAll(redis.RedisClient.prototype);
-var redisClient = redis.createClient(config.redis.port, config.redis.host);
+var redisClient = redis.createClient(config.redis.port, config.redis.host, {password: config.redis.pw});
 
 
 // Generate a list of entities that will be saved in redis. Each entity has its friendlyKey, apiKey and secret.

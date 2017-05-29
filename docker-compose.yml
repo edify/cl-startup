@@ -31,7 +31,7 @@ services:
   cl-redis:
     image: "redis:${CL_REDIS_VERSION}"
     container_name: cl-redis-container
-    command: redis-server --appendonly yes
+    command: "redis-server --requirepass ${CL_REDIS_PW} --appendonly yes"
     ports:
       - "6379:6379"
     expose:
