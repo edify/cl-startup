@@ -119,6 +119,15 @@ $ docker-compose up
 
 ```
 
+3.  If you want to check the logs, you can run the following command:
+
+```bash
+$ docker-compose up
+docker exec -it cl-lo-container /bin/bash
+tail logs/cl-log.log
+```
+
+
 Note: If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
 
 ```bash
