@@ -65,44 +65,44 @@ You can use just one keyId ~ secretKey pair for all the environment variables (C
 
 1.  First, you should run the redis server where the key-value pairs will be stored:
 
-```bash
-$ export CL_REDIS_VERSION=0.0.1
-$ export CL_REDIS_PW=root
-$ docker-compose up cl-redis
-```
+    ```bash
+    $ export CL_REDIS_VERSION=0.0.1
+    $ export CL_REDIS_PW=root
+    $ docker-compose up cl-redis
+    ```
 
 2. Install bootstrapper dependencies:
 
-```bash
-$ cd bootstrapper
-$ export ARTIFACTORY_USERNAME=
-$ export ARTIFACTORY_PASSWORD=
-$ curl -u$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD https://edify.jfrog.io/edify/api/npm/auth > ./.npmrc
-$ echo registry=http://edify.jfrog.io/edify/api/npm/npm-edify >> ./.npmrc
-$ npm install
-```
+    ```bash
+    $ cd bootstrapper
+    $ export ARTIFACTORY_USERNAME=
+    $ export ARTIFACTORY_PASSWORD=
+    $ curl -u$ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD https://edify.jfrog.io/edify/api/npm/auth > ./.npmrc
+    $ echo registry=http://edify.jfrog.io/edify/api/npm/npm-edify >> ./.npmrc
+    $ npm install
+    ```
 
 3.  This script encrypts the apiSecretKey before saving it. You must set an environment variable with the passphrase that will be used in that process. This variable must be the same as described in the previous Environment section.
 
-```bash
-$ export CL_AUTH_PASSPHRASE=passphrase
-```
+    ```bash
+    $ export CL_AUTH_PASSPHRASE=passphrase
+    ```
 
 4. You should set the following environment variables for the redis configuration.
 
-```bash
-$ export CL_REDIS_HOST=localhost
-$ export CL_REDIS_PORT=6379
-$ export CL_REDIS_PW=root
-```
+    ```bash
+    $ export CL_REDIS_HOST=localhost
+    $ export CL_REDIS_PORT=6379
+    $ export CL_REDIS_PW=root
+    ```
 
 
 5.  Execute the script and copy the printed values. 
 
-```bash
-$ chmod +x bin/bootstrapper
-$ ./bin/bootstrapper 
-```
+    ```bash
+    $ chmod +x bin/bootstrapper
+    $ ./bin/bootstrapper 
+    ```
 
 6. You can stop the running redis instance with ctrl + c . In the next section you will run all the images together.
 
@@ -116,25 +116,23 @@ Notes:
 
 1.  Login with your artifactory credentials
 
-```bash
-$ docker login edify-dkr.jfrog.io
-
-```
+    ```bash
+    $ docker login edify-dkr.jfrog.io
+    ```
 
 2.  Execute docker-compose:
 
-```bash
-$ docker-compose up
-
-```
+    ```bash
+    $ docker-compose up
+    ```
 
 3.  If you want to check the logs, you can run the following command:
 
-```bash
-$ docker-compose up
-docker exec -it cl-lo-container /bin/bash
-tail logs/cl-log.log
-```
+    ```bash
+    $ docker-compose up
+    docker exec -it cl-lo-container /bin/bash
+    tail logs/cl-log.log
+    ```
 
 
 Note: If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
@@ -142,5 +140,4 @@ Note: If you experience problems while downloading or executing the docker image
 ```bash
 $ docker rmi image
 $ docker-compose rm
-
 ```
