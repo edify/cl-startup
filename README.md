@@ -13,10 +13,12 @@ Before running the docker-compose file, you need to set the following environmen
 ```bash
 export AWS_ACCESS_KEY=
 export AWS_SECRET_KEY=
-export AWS_S3_BUCKET_NAME=cl-develop
+export AWS_S3_BUCKET_NAME=
 export CERT_KEY_STORE_PATH=./ssl-key
 export CERT_KEY_STORE_PW=changeit
 export CERT_KEY_PW=changeit
+export CL_API_CLIENT_ID=
+export CL_API_CLIENT_SECRET=
 export CL_REDIS_HOST=cl-redis
 export CL_REDIS_PORT=6379
 export CL_REDIS_PW=root
@@ -29,20 +31,25 @@ export CL_ES_URL=cl-elasticsearch:9200
 export CL_ES_HOST=cl-elasticsearch
 export CL_ES_PORT=9300
 export CL_RMQ_URL=amqp://cl-rabbitmq
-export ORIENTDB_ROOT_PASSWORD=
+export ORIENTDB_ROOT_PASSWORD=root
 export CL_CURRICULA_PORT=8081
-export CL_CURRICULA_AUDIT=true
+export CL_CURRICULA_AUDIT=false
 export CL_ODB_NAME=cl-curr-dev
 export CL_ODB_HOST=cl-orientdb
 export CL_ODB_PORT=2424
 export CL_ODB_ROOT_USR=root
-export CL_ODB_ROOT_PWD=
+export CL_ODB_ROOT_PWD=root
 export CL_ODB_USR=cl_orient_user
-export CL_ODB_PWD=
+export CL_ODB_PWD=cl_orient_pwd
 export CL_LO_API_ID=
 export CL_LO_API_SECRET=
 export CL_LO_BASE_URL=http://cl-lo:8080
 export CL_LO_API_URL=/api/v1
+export CL_CURRICULA_BASE_URL=http://cl-curricula:8081
+export CL_CURRICULA_API_URL=/api/v1
+export CL_CURRICULA_API_ID=
+export CL_CURRICULA_API_SECRET=
+
 export CL_MONGODB_VERSION=3.2.8
 export CL_ODB_VERSION=2.2.13
 export CL_RMQ_VERSION=3-management
@@ -52,9 +59,9 @@ export CL_CURRICULA_VERSION=0.0.1
 export CL_INDEX_VERSION=0.0.1
 ```
 
-### Obtaining CL_LO_API Credentias
+### Obtaining API_ID and API_SECRET Credentials.
 
-You can get the CL_LO_API_ID and CL_LO_API_SECRET by running the bootstrapper (requires NodeJS 6.9.1). 
+You can use just one keyId ~ secretKey pair for all the environment variables (CL_CURRICULA_API_ID / CL_CURRICULA_API_SECRET, CL_LO_API_ID / CL_LO_API_SECRET, CL_API_CLIENT_ID / CL_API_CLIENT_SECRET). You can obtain those credentials by running the bootstrapper (requires NodeJS 6.9.1).
 
 1.  First, you should run the redis server where the key-value pairs will be stored:
 
@@ -88,7 +95,7 @@ $ export CL_REDIS_PW=root
 ```
 
 
-5.  Execute the script and copy the printed values.
+5.  Execute the script and copy the printed values. 
 
 ```bash
 $ chmod +x bin/bootstrapper
