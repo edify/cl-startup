@@ -66,6 +66,8 @@ You can use just one keyId ~ secretKey pair for all the environment variables (C
 1.  First, you should run the redis server where the key-value pairs will be stored:
 
 ```bash
+$ export CL_REDIS_VERSION=0.0.1
+$ export CL_REDIS_PW=root
 $ docker-compose up cl-redis
 ```
 
