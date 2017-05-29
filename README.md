@@ -95,6 +95,8 @@ $ chmod +x bin/bootstrapper
 $ ./bin/bootstrapper 
 ```
 
+6. You can stop the running redis instance with ctrl + c . In the next section you will run all the images together.
+
 Notes:
 
   -  If you run ./bin/bootstrapper --flushall, it will erase the redis storage first.

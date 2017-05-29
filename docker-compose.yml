@@ -54,7 +54,7 @@ services:
     container_name: cl-lo-container
     ports:
       - "8080:8080"
-      - "8443:8443"
+      - "8043:8043"
     links:
       - cl-elasticsearch
       - cl-mongodb
@@ -73,18 +73,23 @@ services:
       - CL_API_CLIENT_SECRET
       - CL_REDIS_HOST
       - CL_REDIS_PORT
+      - CL_REDIS_PW
       - CL_AUTH_PASSPHRASE
       - CL_LO_HTTPS_PORT=8043
       - CL_LO_HTTP_PORT=8080
       - CL_MONGO_URI
+      - CL_IT_MONGO_URI
       - CL_ES_URL
       - CL_ES_HOST
       - CL_ES_PORT
       - CL_RMQ_URL
+      - CL_CURRICULA_BASE_URL
+      - CL_CURRICULA_API_URL
+      - CL_CURRICULA_API_ID
+      - CL_CURRICULA_API_SECRET
 
   cl-index:
     image: "edify-dkr.jfrog.io/cl-index:${CL_INDEX_VERSION}"
-    #image: cl-index
     container_name: cl-index-container
     links:
       - cl-elasticsearch
@@ -117,6 +122,7 @@ services:
       - CL_LO_API_SECRET
       - CL_REDIS_HOST
       - CL_REDIS_PORT
+      - CL_REDIS_PW
       - CL_AUTH_PASSPHRASE
       - CL_LO_BASE_URL
       - CL_LO_API_URL

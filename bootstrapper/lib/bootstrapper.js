@@ -116,7 +116,9 @@ function main() {
     try {
         if(flags.flushall) {
             _removeAllKeys().then(function() {
-                bootstrap()
+                return bootstrap()
+            }).then(function() {
+                process.exit(0)
             }).catch(function(err) {
                 throw err
             })
