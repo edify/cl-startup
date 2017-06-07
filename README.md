@@ -23,8 +23,8 @@ export CL_REDIS_HOST=cl-redis
 export CL_REDIS_PORT=6379
 export CL_REDIS_PW=root
 export CL_AUTH_PASSPHRASE=passphrase
-export CL_LO_HTTPS_PORT=8043
-export CL_LO_HTTP_PORT=8080
+export CL_LO_HTTPS_PORT=443
+export CL_LO_HTTP_PORT=80
 export CL_MONGO_URI=mongodb://cl-mongodb/cl_dev
 export CL_IT_MONGO_URI=mongodb://cl-mongodb/cl_integration_tests
 export CL_ES_URL=cl-elasticsearch:9200
@@ -99,11 +99,11 @@ You can use just one keyId ~ secretKey pair for all the environment variables (C
     ```
 
 
-5.  Execute the script and copy the printed values. 
+5.  Execute the script and copy the printed values.
 
     ```bash
     $ chmod +x bin/bootstrapper
-    $ ./bin/bootstrapper 
+    $ ./bin/bootstrapper
     ```
 
 6. You can stop the running redis instance with ctrl + c . In the next section you will run all the images together.
@@ -156,7 +156,7 @@ The Content Library LearningObject image comes with a default SSL certificate us
     ```
 
 
-Notes: 
+Notes:
 
 -  If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
 
@@ -165,6 +165,6 @@ Notes:
     $ docker-compose rm
     ```
 
--  You have to take into account that if you remove the redis image, you will have to start the bootstrapper again. 
+-  You have to take into account that if you remove the redis image, you will have to start the bootstrapper again.
 
 -  If you are having troubles with the OrientDB authentication in cl-curricula, you should recreate the orientdb image with the proper environment variables (ORIENTDB_ROOT_PASSWORD, CL_ODB_NAME, CL_ODB_HOST, CL_ODB_PORT, CL_ODB_ROOT_USR, CL_ODB_ROOT_PWD, CL_ODB_USR, CL_ODB_PWD)
