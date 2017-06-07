@@ -59,6 +59,8 @@ export CL_CURRICULA_VERSION=0.0.1
 export CL_INDEX_VERSION=0.0.1
 ```
 
+Note: The variables ORIENTDB_ROOT_PASSWORD and CL_ODB_ROOT_PWD must have the same value.
+
 ### Obtaining API_ID and API_SECRET Credentials.
 
 You can use just one keyId ~ secretKey pair for all the environment variables (CL_CURRICULA_API_ID / CL_CURRICULA_API_SECRET, CL_LO_API_ID / CL_LO_API_SECRET, CL_API_CLIENT_ID / CL_API_CLIENT_SECRET). You can obtain those credentials by running the bootstrapper (requires NodeJS 6.9.1).
@@ -135,9 +137,15 @@ Notes:
     ```
 
 
-Note: If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
+Notes: 
 
-```bash
-$ docker rmi image
-$ docker-compose rm
-```
+-  If you experience problems while downloading or executing the docker images, you could try removing old images and the docker-compose:
+
+    ```bash
+    $ docker rmi image-name --force
+    $ docker-compose rm
+    ```
+
+-  You have to take into account that if you remove the redis image, you will have to start the bootstrapper again. 
+
+-  If you are having troubles with the OrientDB authentication in cl-curricula, you should recreate the orientdb image with the proper environment variables (ORIENTDB_ROOT_PASSWORD, CL_ODB_NAME, CL_ODB_HOST, CL_ODB_PORT, CL_ODB_ROOT_USR, CL_ODB_ROOT_PWD, CL_ODB_USR, CL_ODB_PWD)
