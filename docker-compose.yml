@@ -55,6 +55,8 @@ services:
     ports:
       - "8080:8080"
       - "8043:8043"
+    volumes:
+      - "./ssl-key:/usr/share/cl-lo/ssl-key"
     links:
       - cl-elasticsearch
       - cl-mongodb

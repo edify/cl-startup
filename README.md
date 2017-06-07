@@ -113,6 +113,25 @@ Notes:
   -  If you run ./bin/bootstrapper --flushall, it will erase the redis storage first.
   -  Check the accounts.json file to add more accounts.
 
+### Creating a Keystore for SSL
+
+The Content Library LearningObject image comes with a default SSL certificate useful in development scenarios; however, a different valid SSL cert may be required to serve on a public domain.
+
+1. Obtain a certificate, chain, and key from Let's Encrypt (recommended)
+
+2. Generate a .p12 keystore from these, and supply a preferred password when prompted:
+  ```
+  openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out fullchain_and_key.p12
+  ```
+
+3. Generate the finished keystore with `keytool`, named `ssl-key` (or whatever you configure as its name with environment variable CERT_KEY_STORE_PATH):
+  ```
+  keytool -importkeystore -deststorepass [password for destination keystore] -destkeypass [password for destination key] -destkeystore ssl-key -srckeystore fullchain_and_key.p12 -srcstoretype PKCS12 -srcstorepass [password you supplied in the previous step]
+  ```
+4. Make sure the file is at the location where docker-compose expects it per CERT_KEY_STORE_PATH -- by default, this is the project's root directory.
+  ```
+  mv ssl-key [/path/to/cl-startup]
+  ```
 
 ## Run
 
