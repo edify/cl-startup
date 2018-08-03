@@ -6,6 +6,19 @@ This repository centralizes the startup process for all the Common Library compo
 
 In order to make this work, you need to install docker and docker-compose. The current versions are 1.12.3 and 1.8.0 respectively.
 
+## Service repos
+
+The Common Library platform is build based on a microservices architecture. This is the repo is the starting point for setting it up. The following is a list of the other repositories for CL's microservices.
+
+* https://github.com/edify/cl-lo
+* https://github.com/edify/cl-curricula
+* https://github.com/edify/cl-index
+* https://github.com/edify/cl-sdk-js
+* https://github.com/edify/cl-sdk-java
+* https://github.com/edify/cl-auth-js
+* https://github.com/edify/cl-auth-java
+
+
 ## Environment
 
 Before running the docker-compose file, you need to set the following environment variables:
